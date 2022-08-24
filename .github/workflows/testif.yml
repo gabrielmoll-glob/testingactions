@@ -9,11 +9,20 @@ jobs:
   on-failure-dev:
     runs-on: ubuntu-latest
     steps:
+      - name: "Say Hello Mona it's Monday"
+        if: ${{ env.DAY_OF_WEEK == 'Wednesday' }}
+        run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
+        env:
+          First_Name: Mona
       - name: Sending notification
         uses: actions/checkout@v3
-      - name: Result from "Send Message to dev"
-        run: echo "Notificando por slack a dev en rama ${{ github.ref }}"
+      - name: Result from "Send Message to DEV"
         if: ${{ github.ref == 'refs/heads/dev' }}
-      - name: Result from "Send Message to dev"
-        run: echo "Notificando por slack a dev en rama ${{ github.ref }}"
+        run: echo "Notificando por slack $Canal en rama ${{ github.ref }}"
+        env:
+          Canal: SLACK_DEV
+      - name: Result from "Send Message to PRD"
         if: ${{ github.ref == 'refs/heads/main' }}
+        run: echo "Notificando por slack $Canal en rama ${{ github.ref }}"
+        env:
+          Canal: SLACK_PRD
