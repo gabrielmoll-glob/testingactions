@@ -22,4 +22,4 @@ jobs:
       - name: Result from "Send Message to DEV"
         run: echo "Notificando por slack $Canal en rama ${{ github.ref }}"
         env:
-          Canal: env.slack-channel
+          Canal: ${{ env.slack-channel }}
