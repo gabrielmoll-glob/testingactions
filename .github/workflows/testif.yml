@@ -1,0 +1,19 @@
+name: testif
+on:
+  push:
+    branches: 
+      - main
+      - dev
+
+jobs:
+  on-failure-dev:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sending notification
+        uses: actions/checkout@v3
+      - name: Result from "Send Message to dev"
+        run: echo "Notificando por slack a dev en rama ${{ github.ref }}"
+        if: ${{ github.ref == 'refs/heads/dev' }}
+      - name: Result from "Send Message to dev"
+        run: echo "Notificando por slack a dev en rama ${{ github.ref }}"
+        if: ${{ github.ref == 'refs/heads/main' }}
