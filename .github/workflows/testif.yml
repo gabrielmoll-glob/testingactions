@@ -9,15 +9,15 @@ jobs:
   on-failure-dev:
     runs-on: ubuntu-latest
     steps:
-      - name: Sending notification
-        uses: actions/checkout@v3
-      - name: Result from "Send Message to DEV"
+      - name: Settings for QA
         if: ${{ github.ref == 'refs/heads/dev' }}
-        run: echo "Notificando por slack $Canal en rama ${{ github.ref }}"
         env:
-          Canal: SLACK_DEV
-      - name: Result from "Send Message to PRD"
+          slack-channel: QA_SLACK
+      - name: Settings for UAT
         if: ${{ github.ref == 'refs/heads/main' }}
+        env:
+          slack-channel: UAT_SLACK
+      - name: Result from "Send Message to DEV"
         run: echo "Notificando por slack $Canal en rama ${{ github.ref }}"
         env:
-          Canal: SLACK_PRD
+          Canal: env.slack-channel
