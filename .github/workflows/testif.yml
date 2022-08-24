@@ -20,6 +20,5 @@ jobs:
         env:
           slack-channel: UAT_SLACK
       - name: Result from "Send Message to DEV"
-        run: echo "Notificando por slack $Canal en rama ${{ github.ref }}"
-        env:
-          Canal: ${{ env.slack-channel }}
+        run: echo "Notificando por slack ${{ env.slack-channel }} en rama ${{ github.ref }}"
+
