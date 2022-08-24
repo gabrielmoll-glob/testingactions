@@ -10,10 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Settings for QA
+        run: echo "${{ env.slack-channel }}"
         if: ${{ github.ref == 'refs/heads/dev' }}
         env:
           slack-channel: QA_SLACK
       - name: Settings for UAT
+        run: echo "${{ env.slack-channel }}"
         if: ${{ github.ref == 'refs/heads/main' }}
         env:
           slack-channel: UAT_SLACK
