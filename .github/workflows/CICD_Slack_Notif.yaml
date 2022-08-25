@@ -10,13 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setting Slack for QA
-        run: echo "QA - canal $Canal token $Token"
+        uses: actions/checkout@v3
         if: ${{ github.ref == 'refs/heads/dev' }}
         with:
           Token: QA_TOKEN
           Canal: QA_SLACK
       - name: Setting Slack for PRD
-        run: echo "PRD - canal $Canal token $Token"
+        uses: actions/checkout@v3
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
           Token: PRD_TOKEN
