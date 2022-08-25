@@ -9,9 +9,10 @@ jobs:
   on-failure:
     runs-on: ubuntu-latest
     steps:
-      - name: Send message to Slack API to QA
+      - name: Setting Slack notify id
         uses: archive/github-actions-slack@v2.3.2
         id: notify
+      - name: Send message to Slack API to QA
         if: ${{ github.ref == 'refs/heads/dev' }}
         with:
           slack-function: send-message
@@ -20,7 +21,7 @@ jobs:
           slack-text: test QA
       - name: Result from "Send Message"
         run: echo "The result was ${{ steps.notify.outputs.slack-result }}"
-      - name: Send message to Slack API to QA
+      - name: Send message to Slack API to PRD
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: archive/github-actions-slack@v2.3.2
         with:
