@@ -23,7 +23,6 @@ jobs:
       - name: Send message to Slack API to QA
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: archive/github-actions-slack@v2.3.2
-        id: notify
         with:
           slack-function: send-message
           slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN_QA }}
