@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send message to Slack API to QA
-        if: ${{ github.ref == 'refs/heads/dev' }}
         uses: archive/github-actions-slack@v2.3.2
         id: notify
+        if: ${{ github.ref == 'refs/heads/dev' }}
         with:
           slack-function: send-message
           slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN_QA }}
