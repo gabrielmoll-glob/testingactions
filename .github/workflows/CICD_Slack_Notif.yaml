@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  on-failure-qa:
+  on-failure:
     runs-on: ubuntu-latest
     steps:
       - name: Send message to Slack API to QA
