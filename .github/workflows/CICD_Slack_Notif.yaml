@@ -10,21 +10,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setting Slack notify id
-        uses: archive/github-actions-slack@v2.3.2
-
+        run: echo "QA - canal $Canal token $Token"
+        if: ${{ github.ref == 'refs/heads/dev' }}
+        env:
+          Token: QA_TOKEN
+          Canal: QA_SLACK
+      - name: Setting Slack notify id
+        run: echo "PRD - canal $Canal token $Token"
+        if: ${{ github.ref == 'refs/heads/main' }}
+        env:
+          Token: PRD_TOKEN
+          Canal: PRD_SLACK
       - name: Send message to Slack API to QA
         uses: archive/github-actions-slack@v2.3.2
         id: notify
-        if: ${{ github.ref == 'refs/heads/dev' }}
         with:
           slack-function: send-message 
-          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN_QA }}
-          slack-channel: C033JLXCSES
-          slack-text: test QA
-        if: ${{ github.ref == 'refs/heads/main' }}
-        with:
-          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN_QA }}
-          slack-channel: C033JLXCSES
-          slack-text: test PRD
+          slack-bot-user-oauth-access-token: ${{ env.Token }}
+          slack-channel: ${{ env.Canal }}
+          slack-text: test 
       - name: Result from "Send Message"
         run: echo "The result was ${{ steps.notify.outputs.slack-result }}"
