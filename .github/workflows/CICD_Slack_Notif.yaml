@@ -1,10 +1,6 @@
 name: New CICD_Slack_Notif
 on:
-  workflow_run:
-    workflows:
-      - '*'
-    types: 
-      - completed
+  push:
     branches:
       - dev
       - main
